@@ -5,7 +5,7 @@ using UnityEngine.UI;
 
 public class LevelController : MonoBehaviour {
     private int turnCtr = -1;
-    private int numTurns;
+    private int numTurns = 1;
     public bool isEvenTurn
     {
         get { return turnCtr % 2 == 0; }
@@ -50,10 +50,19 @@ public class LevelController : MonoBehaviour {
     private Slider rockMassSlider;
     [SerializeField]
     private Text rockMassNotifier;
+    [SerializeField] private GameObject startPanel;
+    [SerializeField] private GameObject roundPanel;
+    [SerializeField] private GameObject gameOverPanel;
+
+
+    private void Awake()
+    {
+        player = Instantiate(player) as GameObject;
+    }
 
     // Use this for initialization
-    void Start () {
-        player = Instantiate(player) as GameObject;
+    void Start ()
+    {
         playerMat = player.GetComponent<MeshRenderer>().material;
         playerCon = player.GetComponent<PlayerController>();
         initTurn();
@@ -93,11 +102,18 @@ public class LevelController : MonoBehaviour {
         Debug.Log("<<initTurn" + "@" + Time.frameCount);
         ++turnCtr;
         updateScore();
-        isTurnOver = false; 
-        isTurnStarted = false;
-        //Change stats and stuff
-        placePlayer();
-        placeRock();
+        if (turnCtr < (numTurns * 2))
+        {
+            isTurnOver = false;
+            isTurnStarted = false;
+            //Change stats and stuff
+            placePlayer();
+            placeRock();
+        }
+        else
+        {
+            gameOver();
+        }
         Debug.Log(">>initTurn" + "@" + Time.frameCount);
     }
 
@@ -106,6 +122,8 @@ public class LevelController : MonoBehaviour {
         player.transform.position = playerPlacement.position;
         player.GetComponent<Rigidbody>().velocity = Vector3.zero;
         adjustPlayerMat();
+        UpdatePlayerAccel();
+        UpdatePlayerMass();
     }
 
     private void adjustPlayerMat()
@@ -121,6 +139,7 @@ public class LevelController : MonoBehaviour {
 
         rocks.Add(thisRock.GetComponent<Rigidbody>());
         teamRocks[playerTurn].Add(thisRock.GetComponent<Rock>());
+        UpdateRockMass();
     }
 
     private void updateScore()
@@ -143,6 +162,10 @@ public class LevelController : MonoBehaviour {
         {
             other.tag = "Untagged";
             isTurnStarted = true;
+            if(turnCtr == 0)
+            {
+                startPanel.SetActive(false);
+            }
         }
     }
 
@@ -175,5 +198,11 @@ public class LevelController : MonoBehaviour {
         Debug.Log(faultingObject.name + turnCtr);
         Destroy(faultingObject);
         initTurn();
+    }
+
+    private void gameOver()
+    {
+        roundPanel.SetActive(false);
+        gameOverPanel.SetActive(true);
     }
 }

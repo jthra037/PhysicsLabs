@@ -17,7 +17,7 @@ public class PlayerController : MonoBehaviour {
     public float accel = 1;
 
     // Use this for initialization
-    void Start () {
+    void Awake () {
         rb = GetComponent<Rigidbody>();
 	}
 	
