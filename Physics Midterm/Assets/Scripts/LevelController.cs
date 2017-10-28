@@ -17,12 +17,11 @@ public class LevelController : MonoBehaviour {
 
     private bool isTurnStarted = false;
     private bool isTurnOver = false;
-    private List<Rigidbody> rocks;
+    private List<Rigidbody> rocks = new List<Rigidbody>();
+    private List<Rock>[] teamRocks = { new List<Rock>(), new List<Rock>() };
 
     [SerializeField]
-    private Text score1;
-    [SerializeField]
-    private Text score2;
+    private Text[] scores;
     [SerializeField]
     private GameObject player;
     [SerializeField]
@@ -63,7 +62,7 @@ public class LevelController : MonoBehaviour {
 
             foreach (Rigidbody rb in rocks)
             {
-                temp = temp && rb.velocity.sqrMagnitude < Mathf.Epsilon;
+                temp = temp && rb.velocity.sqrMagnitude < 0.001;
             }
 
             isTurnOver = temp;
@@ -72,19 +71,22 @@ public class LevelController : MonoBehaviour {
 
     private void initTurn()
     {
+        Debug.Log("<<initTurn" + "@" + Time.frameCount);
         ++turnCtr;
-        isTurnOver = false;
+        updateScore();
+        isTurnOver = false; 
         isTurnStarted = false;
         //Change stats and stuff
         placePlayer();
-        adjustPlayerMat();
         placeRock();
+        Debug.Log(">>initTurn" + "@" + Time.frameCount);
     }
 
     private void placePlayer()
     {
         player.transform.position = playerPlacement.position;
         player.GetComponent<Rigidbody>().velocity = Vector3.zero;
+        adjustPlayerMat();
     }
 
     private void adjustPlayerMat()
@@ -99,16 +101,31 @@ public class LevelController : MonoBehaviour {
         thisMaterial.color = colors[playerTurn];
 
         rocks.Add(thisRock.GetComponent<Rigidbody>());
+        teamRocks[playerTurn].Add(thisRock.GetComponent<Rock>());
+    }
+
+    private void updateScore()
+    {
+        for(int i = 0; i < 2; i++)
+        {
+            int score = 0;
+            foreach(Rock rock in teamRocks[i])
+            {
+                score += rock.Value;
+            }
+
+            scores[i].text = "Score: " + score;
+        }
+
+        initTurn();
     }
 
     private void OnTriggerEnter(Collider other)
     {
-        if (!isTurnStarted)
+        if (!isTurnStarted && other.CompareTag("Rock"))
+        {
+            other.tag = "Untagged";
             isTurnStarted = true;
-    }
-
-    private void OnTriggerExit(Collider other)
-    {
-        initTurn();
+        }
     }
 }
