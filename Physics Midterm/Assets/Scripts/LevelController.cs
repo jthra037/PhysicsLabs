@@ -5,6 +5,7 @@ using UnityEngine.UI;
 
 public class LevelController : MonoBehaviour {
     private int turnCtr = -1;
+    private int numTurns;
     public bool isEvenTurn
     {
         get { return turnCtr % 2 == 0; }
@@ -17,6 +18,7 @@ public class LevelController : MonoBehaviour {
 
     private bool isTurnStarted = false;
     private bool isTurnOver = false;
+    private PlayerController playerCon;
     private List<Rigidbody> rocks = new List<Rigidbody>();
     private List<Rock>[] teamRocks = { new List<Rock>(), new List<Rock>() };
 
@@ -32,11 +34,28 @@ public class LevelController : MonoBehaviour {
     private Transform rockSpawn;
     [SerializeField]
     private Transform playerPlacement;
+    [SerializeField]
+    private Slider numTurnSlider;
+    [SerializeField]
+    private Text numTurnsNotifier;
+    [SerializeField]
+    private Slider playerMassSlider;
+    [SerializeField]
+    private Text playerMassNotifier;
+    [SerializeField]
+    private Slider playerAccelSlider;
+    [SerializeField]
+    private Text playerAccelNotifier;
+    [SerializeField]
+    private Slider rockMassSlider;
+    [SerializeField]
+    private Text rockMassNotifier;
 
     // Use this for initialization
     void Start () {
         player = Instantiate(player) as GameObject;
         playerMat = player.GetComponent<MeshRenderer>().material;
+        playerCon = player.GetComponent<PlayerController>();
         initTurn();
 	}
 	
@@ -116,8 +135,6 @@ public class LevelController : MonoBehaviour {
 
             scores[i].text = "Score: " + score;
         }
-
-        initTurn();
     }
 
     private void OnTriggerEnter(Collider other)
@@ -127,5 +144,36 @@ public class LevelController : MonoBehaviour {
             other.tag = "Untagged";
             isTurnStarted = true;
         }
+    }
+
+    public void UpdateNumTurns()
+    {
+        numTurns = (int)numTurnSlider.value;
+        numTurnsNotifier.text = numTurns.ToString();
+    }
+
+    public void UpdatePlayerMass()
+    {
+        playerCon.rb.mass = playerMassSlider.value;
+        playerMassNotifier.text = playerCon.rb.mass.ToString();
+    }
+
+    public void UpdatePlayerAccel()
+    {
+        playerCon.accel = playerAccelSlider.value;
+        playerAccelNotifier.text = playerCon.accel.ToString();
+    }
+
+    public void UpdateRockMass()
+    {
+        rocks[rocks.Count - 1].mass = rockMassSlider.value;
+        rockMassNotifier.text = rocks[rocks.Count - 1].mass.ToString();
+    }
+
+    public void Fault(GameObject faultingObject)
+    {
+        Debug.Log(faultingObject.name + turnCtr);
+        Destroy(faultingObject);
+        initTurn();
     }
 }

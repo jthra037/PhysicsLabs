@@ -6,13 +6,15 @@ using UnityEngine;
 public class PlayerController : MonoBehaviour {
     private float vert;
     private float hori;
-    private Rigidbody rb;
     private GameObject inRange;
 
     [SerializeField]
-    private float accel = 1;
-    [SerializeField]
     private float maxSpeed = 10;
+
+    [HideInInspector]
+    public Rigidbody rb;
+
+    public float accel = 1;
 
     // Use this for initialization
     void Start () {

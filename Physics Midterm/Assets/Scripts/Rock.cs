@@ -14,11 +14,6 @@ public class Rock : MonoBehaviour {
 	void Start () {
         rb = GetComponent<Rigidbody>();
 	}
-	
-	// Update is called once per frame
-	void Update () {
-		
-	}
 
     private void OnTriggerEnter(Collider other)
     {
