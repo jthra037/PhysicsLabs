@@ -53,6 +53,8 @@ public class LevelController : MonoBehaviour {
     [SerializeField] private GameObject startPanel;
     [SerializeField] private GameObject roundPanel;
     [SerializeField] private GameObject gameOverPanel;
+    [SerializeField]
+    private LineRenderer lr;
 
 
     private void Awake()
@@ -162,6 +164,7 @@ public class LevelController : MonoBehaviour {
         {
             other.tag = "Untagged";
             isTurnStarted = true;
+            predictFinalLocation(other.gameObject);
             if(turnCtr == 0)
             {
                 startPanel.SetActive(false);
@@ -204,5 +207,24 @@ public class LevelController : MonoBehaviour {
     {
         roundPanel.SetActive(false);
         gameOverPanel.SetActive(true);
+    }
+
+    private void predictFinalLocation(GameObject rock)
+    {
+        Rigidbody rb = rocks[rocks.Count - 1];
+        float a = findAccelFriction(rb.mass, rock.GetComponent<CapsuleCollider>().material);
+        Debug.Log("a: " + a);
+        float d = -rb.velocity.sqrMagnitude / (2 * a);
+        Debug.Log("d: " + d);
+        lr.SetPosition(0, rock.transform.position);
+        Debug.Log("Starting position: " + rock.transform.position);
+        lr.SetPosition(1, rock.transform.position + (rb.velocity.normalized * d));
+        Debug.Log("Ending position: " + (rock.transform.position + (rb.velocity.normalized * d)));
+    }
+
+    private float findAccelFriction(float mass, PhysicMaterial mat)
+    {
+        //return Physics.gravity.y * mass * mat.dynamicFriction; //Theoretically accurate
+        return Physics.gravity.y * mat.dynamicFriction; //works better for Unity
     }
 }
