@@ -6,6 +6,7 @@ public class Lab4_101009388 : MonoBehaviour {
 
     private bool isOnGround;
     private Rigidbody rb;
+    private int jumps = 0;
 
 	// Use this for initialization
 	void Start () {
@@ -29,21 +30,23 @@ public class Lab4_101009388 : MonoBehaviour {
             float height = hit.transform.lossyScale.y;
             float speed = otherRB.velocity.z;
 
-            Debug.Log(distance);
-            Debug.Log(height);
-            Debug.Log(speed);
+            //Debug.Log(distance);
+            //Debug.Log(height);
+            //Debug.Log(speed);
 
             float jumpVi = findVi(0, Physics.gravity.y, height + 1);
             float jumpT = findT(0, jumpVi, Physics.gravity.y);
             float postJumpDistance = findNextD(distance, speed, jumpT);
 
-            Debug.Log(jumpVi);
-            Debug.Log(jumpT);
-            Debug.Log(postJumpDistance);
+            //Debug.Log(jumpVi);
+            //Debug.Log(jumpT);
+            //Debug.Log(postJumpDistance);
 
-            if (postJumpDistance < 0.45f && isOnGround)
+            if (postJumpDistance < 0.45f && isOnGround && jumps == 0)
             {
                 rb.AddForce(transform.up * jumpVi, ForceMode.VelocityChange);
+                jumps++;
+                Debug.Log("Jumping!");
             }
         }
     }
@@ -53,6 +56,7 @@ public class Lab4_101009388 : MonoBehaviour {
         if (other.CompareTag("Ground"))
         {
             isOnGround = true;
+            jumps = 0;
         }
     }
 
