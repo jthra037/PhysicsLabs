@@ -17,6 +17,24 @@ public class Lab4_101009388 : MonoBehaviour {
 		
 	}
 
+    private void FixedUpdate()
+    {
+        RaycastHit hit;
+
+        if (Physics.Raycast(transform.position, transform.forward, out hit))
+        {
+            Rigidbody otherRB = hit.transform.gameObject.GetComponentInParent<Rigidbody>();
+            PillarController otherController = hit.transform.gameObject.GetComponentInParent<PillarController>();
+            float distance = hit.distance;
+            float height = hit.transform.lossyScale.y;
+            float speed = otherRB.velocity.z;
+
+            Debug.Log(distance);
+            Debug.Log(height);
+            Debug.Log(speed);
+        }
+    }
+
     private void OnTriggerEnter(Collider other)
     {
         if (other.CompareTag("Ground"))
