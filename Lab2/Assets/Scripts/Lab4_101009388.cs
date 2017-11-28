@@ -24,7 +24,7 @@ public class Lab4_101009388 : MonoBehaviour {
         if (Physics.Raycast(transform.position, transform.forward, out hit))
         {
             Rigidbody otherRB = hit.transform.gameObject.GetComponentInParent<Rigidbody>();
-            PillarController otherController = hit.transform.gameObject.GetComponentInParent<PillarController>();
+         
             float distance = hit.distance;
             float height = hit.transform.lossyScale.y;
             float speed = otherRB.velocity.z;
@@ -32,6 +32,19 @@ public class Lab4_101009388 : MonoBehaviour {
             Debug.Log(distance);
             Debug.Log(height);
             Debug.Log(speed);
+
+            float jumpVi = findVi(0, Physics.gravity.y, height + 1);
+            float jumpT = findT(0, jumpVi, Physics.gravity.y);
+            float postJumpDistance = findNextD(distance, speed, jumpT);
+
+            Debug.Log(jumpVi);
+            Debug.Log(jumpT);
+            Debug.Log(postJumpDistance);
+
+            if (postJumpDistance < 0.45f && isOnGround)
+            {
+                rb.AddForce(transform.up * jumpVi, ForceMode.VelocityChange);
+            }
         }
     }
 
@@ -49,5 +62,20 @@ public class Lab4_101009388 : MonoBehaviour {
         {
             isOnGround = false;
         }
+    }
+
+    private float findVi(float vf, float a, float d)
+    {
+        return Mathf.Sqrt((vf * vf) - (2 * a * d));
+    }
+
+    private float findT(float vf, float vi, float a)
+    {
+        return (vf - vi) / a;
+    }
+
+    private float findNextD(float d, float v, float t)
+    {
+        return d + (v * t);
     }
 }
