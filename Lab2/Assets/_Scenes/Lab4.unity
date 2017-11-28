@@ -151,9 +151,15 @@ Prefab:
       propertyPath: m_Name
       value: PillarNode (2)
       objectReference: {fileID: 0}
-    - target: {fileID: 4237923831255558, guid: 4687e9114f8bdfb498aa3dd2b88cc743, type: 2}
-      propertyPath: m_LocalEulerAnglesHint.z
+    - target: {fileID: 54387320855984636, guid: 4687e9114f8bdfb498aa3dd2b88cc743,
+        type: 2}
+      propertyPath: m_IsKinematic
       value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 54387320855984636, guid: 4687e9114f8bdfb498aa3dd2b88cc743,
+        type: 2}
+      propertyPath: m_Constraints
+      value: 112
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: 4687e9114f8bdfb498aa3dd2b88cc743, type: 2}
@@ -423,7 +429,7 @@ Prefab:
       objectReference: {fileID: 0}
     - target: {fileID: 4237923831255558, guid: 4687e9114f8bdfb498aa3dd2b88cc743, type: 2}
       propertyPath: m_LocalPosition.y
-      value: -2.374222e-16
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 4237923831255558, guid: 4687e9114f8bdfb498aa3dd2b88cc743, type: 2}
       propertyPath: m_LocalPosition.z
@@ -526,6 +532,29 @@ Rigidbody:
   m_Interpolate: 0
   m_Constraints: 0
   m_CollisionDetection: 0
+--- !u!135 &2070570871
+SphereCollider:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 2070570868}
+  m_Material: {fileID: 0}
+  m_IsTrigger: 1
+  m_Enabled: 1
+  serializedVersion: 2
+  m_Radius: 0.1
+  m_Center: {x: 0, y: -0.05, z: 0}
+--- !u!114 &2070570872
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 2070570868}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 9267e25a2eb7f614f869545e96f5c4ad, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1001 &2101672610
 Prefab:
   m_ObjectHideFlags: 0
@@ -539,7 +568,7 @@ Prefab:
       objectReference: {fileID: 0}
     - target: {fileID: 4237923831255558, guid: 4687e9114f8bdfb498aa3dd2b88cc743, type: 2}
       propertyPath: m_LocalPosition.y
-      value: -2.374222e-16
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 4237923831255558, guid: 4687e9114f8bdfb498aa3dd2b88cc743, type: 2}
       propertyPath: m_LocalPosition.z
@@ -568,6 +597,21 @@ Prefab:
     - target: {fileID: 1161314068974366, guid: 4687e9114f8bdfb498aa3dd2b88cc743, type: 2}
       propertyPath: m_Name
       value: PillarNode (1)
+      objectReference: {fileID: 0}
+    - target: {fileID: 54387320855984636, guid: 4687e9114f8bdfb498aa3dd2b88cc743,
+        type: 2}
+      propertyPath: m_IsKinematic
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 54387320855984636, guid: 4687e9114f8bdfb498aa3dd2b88cc743,
+        type: 2}
+      propertyPath: m_Constraints
+      value: 112
+      objectReference: {fileID: 0}
+    - target: {fileID: 114293935970834370, guid: 4687e9114f8bdfb498aa3dd2b88cc743,
+        type: 2}
+      propertyPath: speedMax
+      value: 5
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: 4687e9114f8bdfb498aa3dd2b88cc743, type: 2}
