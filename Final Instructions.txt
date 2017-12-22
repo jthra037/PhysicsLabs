@@ -1,0 +1,25 @@
+DUE JAN 18TH
+Please submit all code, and build of working version.
+
+
+Platformer
+Physics driven avatar (25%)
+Moves based on velocity, force or impulse, you choose. Moves in direction they are facing, use angular velocity to rotate. 
+We will have a class on angular velocity and torque in the first week back, in the mean time feel free to search it or email me questions regarding it. 
+There should be a regular speed and sprint speed. There also should be a jump that is good enough to clear a 2m obstacle and make it under a 6m ceiling. In both sprint and regular speed. 
+Use arrow keys or wasd for movement and space to jump. A/d can be used for rotation or strafing, in that case find two other buttons or use mouse to control player rotation.
+Falling platforms/tiles (10%)
+Have at least 3 tiles that are suspended in mid air, when the player makes contact with them they start falling. The player has to jump off and on to the next platform. Up to you how close to make them together, can be horizontal or vertical up to you.
+Launch cannon  (15%)
+Have a cannon that will launch you to a platform. No need to rotate up and down to aim, just get in it and it will launch you to the a part of your world you can only access with this cannon.
+Bonus (10%) if it successfully launches you to a moving platform, every time.
+Ice surface  (5%)
+Have a part of your game world that is friction less, you remain in motion even if you let go of wasd
+Launch pad/cannon (10%)
+Have a segment that is unreachable unless a player pushes a block and then jumps on it. Make sure your player can overcome the friction of this block on the ground and position it in a place that they can then jump on and jump off to get to the otherwise unreachable area.
+Projectiles (20%)
+Have a cannon launch projectiles at the player. If the player is still they projectiles will connect. Set a variable time that the are launched. Use physics to predict the velocity of the projectiles in order to connect with the player.
+Overall presentation (20%)
+Ui, player feedback, checkpoint, clear end game.  
+
+Try to make it fun.
