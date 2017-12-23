@@ -11,6 +11,11 @@ ProjectSettings/ProjectSettings.asset
 ProjectSettings/ProjectVersion.txt
 !*.dll
 
+# ======= #
+# Unknown #
+# ======= #
+*storage.ide
+
 # ===================================== #
 # Visual Studio / MonoDevelop generated #
 # ===================================== #

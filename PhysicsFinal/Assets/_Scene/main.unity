@@ -167,7 +167,7 @@ Transform:
   - {fileID: 426266470}
   - {fileID: 321286846}
   m_Father: {fileID: 0}
-  m_RootOrder: 2
+  m_RootOrder: 1
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!114 &204787875
 MonoBehaviour:
@@ -430,7 +430,7 @@ GameObject:
   - component: {fileID: 1307210467}
   - component: {fileID: 1307210466}
   m_Layer: 0
-  m_Name: Cube (3)
+  m_Name: FrictionlessFloor
   m_TagString: Ground
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -498,7 +498,7 @@ Transform:
   m_LocalScale: {x: 10, y: 1, z: 10}
   m_Children: []
   m_Father: {fileID: 0}
-  m_RootOrder: 3
+  m_RootOrder: 2
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &1558368949
 GameObject:
@@ -512,7 +512,7 @@ GameObject:
   - component: {fileID: 1558368951}
   - component: {fileID: 1558368950}
   m_Layer: 0
-  m_Name: Cube
+  m_Name: Floor
   m_TagString: Ground
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -580,7 +580,7 @@ Transform:
   m_LocalScale: {x: 10, y: 1, z: 10}
   m_Children: []
   m_Father: {fileID: 0}
-  m_RootOrder: 1
+  m_RootOrder: 4
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &1771063277
 GameObject:
@@ -594,7 +594,7 @@ GameObject:
   - component: {fileID: 1771063279}
   - component: {fileID: 1771063278}
   m_Layer: 0
-  m_Name: Cube (4)
+  m_Name: IceFloor
   m_TagString: Ground
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -662,5 +662,5 @@ Transform:
   m_LocalScale: {x: 10, y: 1, z: 10}
   m_Children: []
   m_Father: {fileID: 0}
-  m_RootOrder: 4
+  m_RootOrder: 3
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
