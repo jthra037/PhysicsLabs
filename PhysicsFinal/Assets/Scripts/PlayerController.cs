@@ -21,6 +21,7 @@ public class PlayerController : MonoBehaviour {
 
     public bool isShotFromCannon = false;
     public bool isInCannon = false;
+    public Cannon loadedCannon = null;
 
 	// Use this for initialization
 	void Start ()
@@ -86,7 +87,10 @@ public class PlayerController : MonoBehaviour {
         else if (Input.GetAxis("Jump") != 0 &&
             isInCannon)
         {
-            
+            loadedCannon.Fire();
+            isShotFromCannon = true;
+            isInCannon = false;
+            grounded = false;
         }
 
         // looks less floaty if gravity is more intense during falls

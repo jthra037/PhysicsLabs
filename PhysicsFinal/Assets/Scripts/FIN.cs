@@ -14,7 +14,7 @@ public static class FIN
     {
         // Gravity is tripled for character
         float modifier = isCharacter ? 3 : 1;
-        return Mathf.Sqrt(-2 * (modifier * Physics.gravity.y) * D);
+        return Mathf.Sqrt(-2 * (modifier * Physics.gravity.y) * Mathf.Abs(D));
     }
 
     /// <summary>
@@ -70,12 +70,12 @@ public static class FIN
     {
         float det = FindDet(A, B, C);
 
-        if (IsNegative(det))
+        if (!IsNegative(det))
         {
             float X1;
             float X2;
-            X1 = -(B + det) / (2 * A);
-            X2 = (-B + det) / (2 * A);
+            X1 = -(B + Mathf.Sqrt(det)) / (2 * A);
+            X2 = (-B + Mathf.Sqrt(det)) / (2 * A);
             return new Vector2(X1, X2);
         }
 
@@ -125,16 +125,22 @@ public static class FIN
     {
         float Viy = FindViForPeak(peakHeight);
         float peakTime = FindPeakTime(peakHeight, Viy);
+
+        Debug.Log("Peak Height: " + peakHeight);
+
         // Re-arrange D = ViT + (1/2)AT^2 into Quadratic Form: 0 = (1/2)AT^2 + ViT - D
         Vector2 timeOptions = SolveQuadratic((0.5f * Physics.gravity.y), Viy, -heightDisplacement);
-        if (timeOptions.Equals(new Vector2()))
-        {
-            return Mathf.Infinity;
-        }
-        else
-        {
-            return PickAppropriateTime(timeOptions, peakTime);
-        }
+
+        return timeOptions.x;
+
+        //if (timeOptions.Equals(new Vector2()))
+        //{
+        //    return Mathf.Infinity;
+        //}
+        //else
+        //{
+        //    return PickAppropriateTime(timeOptions, peakTime);
+        //}
     }
 
     /// <summary>
@@ -145,13 +151,16 @@ public static class FIN
     /// <param name="startingPosition">Position our projectile begins at</param>
     /// <param name="finalPosition">Target for our projectile</param>
     /// <param name="relativeVelocity">Use Vector.zero if both starting and ending positions are stationary</param>
-    /// <returns></returns>
+    /// <returns>Muzzle velocity to arrive at destination</returns>
     public static Vector3 FindTrajectoryVelocity(Vector3 startingPosition, Vector3 finalPosition, Vector3 relativeVelocity)
     {
         Vector3 displacement = finalPosition - startingPosition;
+        float arcMod = displacement.y < 0 ? 0.3f : 3.5f; // heuristic for how arced the flight path should be
 
-        float time = FindLandingTime(displacement.y * 1.2f, displacement.y);
-        float Viy = FindViForPeak(displacement.y * 1.2f);
+        float time = FindLandingTime(displacement.y * arcMod, displacement.y);
+        float Viy = FindViForPeak(displacement.y * arcMod);
+
+        Debug.Log(time);
         float Vix = FindV(displacement.x + (relativeVelocity.x * time), time);
         float Viz = FindV(displacement.z + (relativeVelocity.z * time), time);
 
