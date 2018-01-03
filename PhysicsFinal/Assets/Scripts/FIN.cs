@@ -17,6 +17,20 @@ public static class FIN
         return Mathf.Sqrt(-2 * (modifier * Physics.gravity.y) * Mathf.Abs(D));
     }
 
+    public static float findAtoStopFromVByD(float V, float D)
+    {
+        return -(V * V) / (2 * D);
+    }
+
+    public static Vector3 FindAccelerationToStopAt(Vector3 velocity, Vector3 displacement)
+    {
+        float x = findAtoStopFromVByD(velocity.x, displacement.x);
+        float y = findAtoStopFromVByD(velocity.y, displacement.y);
+        float z = findAtoStopFromVByD(velocity.z, displacement.z);
+
+        return new Vector3(x, y, z);
+    }
+
     /// <summary>
     /// With constant acceleration, find the time to cover displacement
     /// given Vi and with Vf == 0
