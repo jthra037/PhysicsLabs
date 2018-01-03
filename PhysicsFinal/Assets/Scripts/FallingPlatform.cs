@@ -52,7 +52,7 @@ public class FallingPlatform : MonoBehaviour {
             float yaw = Random.Range(-5, 5);
             float roll = Random.Range(-5, 5);
 
-            transform.rotation = Quaternion.Euler(pitch, yaw, roll);
+            //transform.rotation = Quaternion.Euler(pitch, yaw, roll);
 
             yield return new WaitForSeconds(0.15f);
         }

@@ -95,7 +95,7 @@ public class PlayerController : MonoBehaviour {
 
         // looks less floaty if gravity is more intense during falls
         // this makes projectiles way harder to calculate though, so turn it off sometimes
-        if (falling && !isShotFromCannon)
+        if (!grounded && falling && !isShotFromCannon)
         {
             rb.AddForce(2 * Physics.gravity);
         }

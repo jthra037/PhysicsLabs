@@ -61,4 +61,20 @@ public class MovingPlatform : MonoBehaviour {
 
         rb.velocity = (currentTarget - transform.position).normalized * speed;
     }
+
+    private void OnTriggerEnter(Collider other)
+    {
+        if (other.CompareTag("Player"))
+        {
+            other.transform.parent = transform;
+        }
+    }
+
+    private void OnTriggerExit(Collider other)
+    {
+        if (other.CompareTag("Player"))
+        {
+            other.transform.parent = null;
+        }
+    }
 }

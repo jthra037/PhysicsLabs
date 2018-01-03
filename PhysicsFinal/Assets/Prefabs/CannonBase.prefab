@@ -22,6 +22,7 @@ GameObject:
   - component: {fileID: 33713489328203854}
   - component: {fileID: 65905915574905604}
   - component: {fileID: 23052813152706242}
+  - component: {fileID: 114254241305016304}
   m_Layer: 0
   m_Name: CannonBase
   m_TagString: Cannon
@@ -193,6 +194,18 @@ BoxCollider:
   serializedVersion: 2
   m_Size: {x: 1, y: 1, z: 1}
   m_Center: {x: 0, y: 0, z: 0}
+--- !u!114 &114254241305016304
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1462486786145984}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: ee12cecdbe356944baee15e584c8fa8a, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  target: {fileID: 0}
 --- !u!136 &136641813634652236
 CapsuleCollider:
   m_ObjectHideFlags: 1
