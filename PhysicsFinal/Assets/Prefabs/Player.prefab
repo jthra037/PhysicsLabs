@@ -239,6 +239,7 @@ MonoBehaviour:
   airbourneModifier: 0.2
   isShotFromCannon: 0
   isInCannon: 0
+  loadedCannon: {fileID: 0}
 --- !u!124 &124161939443414970
 Behaviour:
   m_ObjectHideFlags: 1

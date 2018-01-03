@@ -18,7 +18,7 @@ public class FallingPlatform : MonoBehaviour {
     {
         rb = GetComponent<Rigidbody>();
         movementController = GetComponent<MovingPlatform>();
-        rb.isKinematic = true;
+        rb.useGravity = false;
 	}
 
     IEnumerator delayThenFall()

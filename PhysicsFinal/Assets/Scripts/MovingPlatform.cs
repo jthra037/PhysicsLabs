@@ -6,8 +6,14 @@ using UnityEngine;
 public class MovingPlatform : MonoBehaviour {
 
     private Rigidbody rb;
-    [SerializeField] private Vector3 pos1;
-    [SerializeField] private Vector3 pos2;
+    [SerializeField] private Transform target1;
+    [SerializeField] private Transform target2;
+    private Vector3 pos1;
+    private Vector3 pos2;
+
+    private Vector3 currentTarget;
+
+    [SerializeField] private float speed = 3;
 
     // Use this for initialization
     void Start ()
@@ -15,6 +21,12 @@ public class MovingPlatform : MonoBehaviour {
         rb = GetComponent<Rigidbody>();
 
         rb.useGravity = false;
+        rb.freezeRotation = true;
+
+        pos1 = target1.position;
+        pos2 = target2.position;
+
+        currentTarget = WhichIsFarther();
     }
 
     private void Update()
@@ -37,11 +49,16 @@ public class MovingPlatform : MonoBehaviour {
 
         float epsilon = (rb.velocity * Time.fixedDeltaTime).sqrMagnitude;
 
-        return sub1
+        return sub1 - epsilon <= 0 || sub2 - epsilon <= 0;
     }
 
     private void FixedUpdate()
     {
-        
+        if (ShouldIChangeCourse())
+        {
+            currentTarget = WhichIsFarther();
+        }
+
+        rb.velocity = (currentTarget - transform.position).normalized * speed;
     }
 }
