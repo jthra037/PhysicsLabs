@@ -1,6 +1,7 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.UI;
 
 [RequireComponent(typeof(Rigidbody), typeof(SceneNavigator))]
 public class PlayerController : MonoBehaviour {
@@ -14,12 +15,17 @@ public class PlayerController : MonoBehaviour {
     private float rotSpeed = 10;
     [SerializeField]
     private float airbourneModifier = 0.2f;
+    [SerializeField]
+    private float hintDuration = 4.5f;
+    [SerializeField]
+    private Text hintField;
 
     private bool grounded = true;
     private bool jumping = false;
     private bool falling = false;
 
     private float jumpSpeed;
+    private Coroutine hintRoutine;
 
     public bool isShotFromCannon = false;
     public bool isInCannon = false;
@@ -28,6 +34,7 @@ public class PlayerController : MonoBehaviour {
 	// Use this for initialization
 	void Start ()
     {
+        hintField = FindObjectOfType<Text>();
         sn = GetComponent<SceneNavigator>();
         rb = GetComponent<Rigidbody>();
         rb.maxAngularVelocity = (1.5f * Mathf.PI); // Make sure we don't spin too fast
@@ -132,5 +139,26 @@ public class PlayerController : MonoBehaviour {
     private float FindReqJumpSpeed(float height)
     {
         return Mathf.Sqrt(-2 * Physics.gravity.y * height);
+    }
+
+    public void GiveHint(string hint)
+    {
+        if (hintRoutine == null)
+        {
+            hintRoutine = StartCoroutine(showHint(hint));
+        }
+        else
+        {
+            StopCoroutine(hintRoutine);
+            hintRoutine = StartCoroutine(showHint(hint));
+        }
+
+    }
+
+    private IEnumerator showHint(string hint)
+    {
+        hintField.text = hint;
+        yield return new WaitForSeconds(hintDuration);
+        hintField.text = "";
     }
 }
