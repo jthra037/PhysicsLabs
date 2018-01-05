@@ -58,6 +58,14 @@ public class FallingPlatform : MonoBehaviour {
         }
     }
 
+    private void Update()
+    {
+        if(transform.position.y < -100)
+        {
+            Destroy(gameObject);
+        }
+    }
+
     private void FixedUpdate()
     {
         if (falling)

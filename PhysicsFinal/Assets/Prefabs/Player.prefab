@@ -40,6 +40,7 @@ GameObject:
   - component: {fileID: 135356706800648170}
   - component: {fileID: 114601823807987554}
   - component: {fileID: 65543905355470034}
+  - component: {fileID: 114152870852756498}
   m_Layer: 0
   m_Name: Player
   m_TagString: Player
@@ -115,8 +116,8 @@ Camera:
   m_GameObject: {fileID: 1947739421214830}
   m_Enabled: 1
   serializedVersion: 2
-  m_ClearFlags: 1
-  m_BackGroundColor: {r: 0.19215687, g: 0.3019608, b: 0.4745098, a: 0}
+  m_ClearFlags: 2
+  m_BackGroundColor: {r: 0.516691, g: 0.26005623, b: 0.5441177, a: 0}
   m_NormalizedViewPortRect:
     serializedVersion: 2
     x: 0
@@ -223,6 +224,18 @@ Behaviour:
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 1947739421214830}
   m_Enabled: 1
+--- !u!114 &114152870852756498
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1422118607169768}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 2e4f56b8dedaf1a49905f6709132329d, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  sceneList: []
 --- !u!114 &114601823807987554
 MonoBehaviour:
   m_ObjectHideFlags: 1

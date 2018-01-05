@@ -166,15 +166,27 @@ public static class FIN
     /// <param name="finalPosition">Target for our projectile</param>
     /// <param name="relativeVelocity">Use Vector.zero if both starting and ending positions are stationary</param>
     /// <returns>Muzzle velocity to arrive at destination</returns>
-    public static Vector3 FindTrajectoryVelocity(Vector3 startingPosition, Vector3 finalPosition, Vector3 relativeVelocity)
+    public static Vector3 FindTrajectoryVelocity(Vector3 startingPosition, Vector3 finalPosition, Vector3 relativeVelocity, float arc = 3.5f)
     {
+        // Correct for weird arc values
+        if (arc < 1)
+        {
+            arc = 1;
+        }
+
+        Debug.Log(arc);
+
         Vector3 displacement = finalPosition - startingPosition;
-        float arcMod = displacement.y < 0 ? 0.3f : 3.5f; // heuristic for how arced the flight path should be
+        float arcMod = displacement.y <= -5 ? arc/11 : arc; // heuristic for how arced the flight path should be
 
-        float time = FindLandingTime(displacement.y * arcMod, displacement.y);
-        float Viy = FindViForPeak(displacement.y * arcMod);
+        float peakHeight = Mathf.Abs(displacement.y) < 1 ? 1 * arcMod : Mathf.Abs(displacement.y * arcMod);
 
-        Debug.Log(time);
+        float time = FindLandingTime(peakHeight, displacement.y);
+        float Viy = FindViForPeak(peakHeight);
+
+        Debug.Log(Viy);
+
+        //Debug.Log(time);
         float Vix = FindV(displacement.x + (relativeVelocity.x * time), time);
         float Viz = FindV(displacement.z + (relativeVelocity.z * time), time);
 

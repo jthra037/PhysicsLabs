@@ -2,9 +2,11 @@
 using System.Collections.Generic;
 using UnityEngine;
 
+[RequireComponent(typeof(Rigidbody), typeof(SceneNavigator))]
 public class PlayerController : MonoBehaviour {
 
     private Rigidbody rb;
+    private SceneNavigator sn;
 
     [SerializeField]
     private float moveSpeed = 10;
@@ -26,6 +28,7 @@ public class PlayerController : MonoBehaviour {
 	// Use this for initialization
 	void Start ()
     {
+        sn = GetComponent<SceneNavigator>();
         rb = GetComponent<Rigidbody>();
         rb.maxAngularVelocity = (1.5f * Mathf.PI); // Make sure we don't spin too fast
 
@@ -56,6 +59,11 @@ public class PlayerController : MonoBehaviour {
 
         // keep track of when the player is falling
         falling = rb.velocity.y < 0 && Mathf.Abs(rb.velocity.y) > Mathf.Epsilon && !isShotFromCannon;
+
+        if(transform.position.y < -100)
+        {
+            sn.GoToSceneAtIndex(2);
+        }
     }
 
     // Update is called once per frame

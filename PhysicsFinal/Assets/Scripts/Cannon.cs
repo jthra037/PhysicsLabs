@@ -21,7 +21,8 @@ public class Cannon : MonoBehaviour {
     {
         Vector3 muzzleVelocity = FIN.FindTrajectoryVelocity(transform.position,
             target.transform.position,
-            targetRB == null ? Vector3.zero : targetRB.velocity);
+            targetRB == null ? Vector3.zero : targetRB.velocity,
+            3.5f);
 
         ammoRB.isKinematic = false;
         ammoRB.AddForce(muzzleVelocity, ForceMode.VelocityChange);
