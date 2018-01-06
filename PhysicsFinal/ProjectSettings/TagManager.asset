@@ -6,6 +6,8 @@ TagManager:
   tags:
   - Ground
   - Cannon
+  - Finale
+  - PlayerHintBox
   layers:
   - Default
   - TransparentFX

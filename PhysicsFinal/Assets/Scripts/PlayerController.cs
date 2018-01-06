@@ -19,6 +19,8 @@ public class PlayerController : MonoBehaviour {
     private float hintDuration = 4.5f;
     [SerializeField]
     private Text hintField;
+    [SerializeField]
+    private GameObject finalePanel;
 
     private bool grounded = true;
     private bool jumping = false;
@@ -34,9 +36,12 @@ public class PlayerController : MonoBehaviour {
 	// Use this for initialization
 	void Start ()
     {
-        hintField = FindObjectOfType<Text>();
+        hintField = GameObject.FindGameObjectWithTag("PlayerHintBox").GetComponent<Text>();
+        finalePanel = GameObject.FindGameObjectWithTag("Finale");
         sn = GetComponent<SceneNavigator>();
         rb = GetComponent<Rigidbody>();
+
+        finalePanel.SetActive(false);
         rb.maxAngularVelocity = (1.5f * Mathf.PI); // Make sure we don't spin too fast
 
         //jumpSpeed = FindReqJumpSpeed(2.6f); // Figure out what Viy should be to jump 2.6 units all the time
@@ -160,5 +165,11 @@ public class PlayerController : MonoBehaviour {
         hintField.text = hint;
         yield return new WaitForSeconds(hintDuration);
         hintField.text = "";
+    }
+
+    public void WinnerGagnon()
+    {
+        finalePanel.SetActive(true);
+        Destroy(this);
     }
 }

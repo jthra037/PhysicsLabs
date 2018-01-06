@@ -57,13 +57,13 @@ public class Turret : MonoBehaviour {
         myProjectile.GetComponent<Rigidbody>().velocity = 
             FIN.FindTrajectoryVelocity(transform.position,
             target.transform.position,
-            targetRB == null ? Vector3.zero : Random.Range(0.5f, 1.5f) * targetRB.velocity, 
-            2f);
+            targetRB == null ? Vector3.zero : Random.Range(0.5f, 1.5f) * targetRB.velocity, // have some randomization on accuracy
+            1.7f); // pretty aggressive curve
     }
 
     private IEnumerator RunFiringSequence()
     {
-        yield return new WaitForSeconds(Random.Range(1.2f, 2.4f)); // Don't fire right away
+        yield return new WaitForSeconds(Random.Range(0.2f, 0.9f)); // Don't fire right away
         while(isOn)
         {
             FireAtTarget();
