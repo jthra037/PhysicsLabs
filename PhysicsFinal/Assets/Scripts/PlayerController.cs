@@ -8,6 +8,7 @@ public class PlayerController : MonoBehaviour {
 
     private Rigidbody rb;
     private SceneNavigator sn;
+    private AudioSource myAs;
 
     [SerializeField]
     private float moveSpeed = 10;
@@ -40,6 +41,7 @@ public class PlayerController : MonoBehaviour {
         finalePanel = GameObject.FindGameObjectWithTag("Finale");
         sn = GetComponent<SceneNavigator>();
         rb = GetComponent<Rigidbody>();
+        myAs = GetComponent<AudioSource>();
 
         finalePanel.SetActive(false);
         rb.maxAngularVelocity = (1.5f * Mathf.PI); // Make sure we don't spin too fast
@@ -170,6 +172,7 @@ public class PlayerController : MonoBehaviour {
     public void WinnerGagnon()
     {
         finalePanel.SetActive(true);
+        myAs.Play();
         Destroy(this);
     }
 }

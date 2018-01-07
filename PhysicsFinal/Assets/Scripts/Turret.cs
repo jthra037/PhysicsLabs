@@ -6,6 +6,7 @@ public class Turret : MonoBehaviour {
 
     private bool isOn = false;
     private bool isFiring = false;
+    private AudioSource myAs;
 
     public bool On
     {
@@ -48,6 +49,7 @@ public class Turret : MonoBehaviour {
             Debug.Break();
         }
 
+        myAs = GetComponent<AudioSource>();
         targetRB = target.GetComponent<Rigidbody>();
 	}
 
@@ -59,6 +61,8 @@ public class Turret : MonoBehaviour {
             target.transform.position,
             targetRB == null ? Vector3.zero : Random.Range(0.5f, 1.5f) * targetRB.velocity, // have some randomization on accuracy
             1.7f); // pretty aggressive curve
+
+        myAs.Play();
     }
 
     private IEnumerator RunFiringSequence()

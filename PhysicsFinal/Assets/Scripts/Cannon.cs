@@ -6,6 +6,7 @@ public class Cannon : MonoBehaviour {
 
     [SerializeField] private GameObject target;
     private Rigidbody targetRB;
+    private AudioSource myAs;
     //private Vector3 targetPosition;
 
     private bool isLoaded = false;
@@ -15,7 +16,8 @@ public class Cannon : MonoBehaviour {
 	void Start ()
     {
         targetRB = target.GetComponent<Rigidbody>();
-	}
+        myAs = GetComponent<AudioSource>();
+    }
 
     public void Fire()
     {
@@ -29,6 +31,8 @@ public class Cannon : MonoBehaviour {
 
         isLoaded = false;
         ammoRB = null;
+
+        myAs.Play();
     }
 	
 
