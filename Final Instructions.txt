@@ -3,9 +3,9 @@ Please submit all code, and build of working version.
 
 
 Platformer
-Physics driven avatar (25%)
-Moves based on velocity, force or impulse, you choose. Moves in direction they are facing, use angular velocity to rotate. 
-We will have a class on angular velocity and torque in the first week back, in the mean time feel free to search it or email me questions regarding it. 
++Physics driven avatar (25%) 
++Moves based on velocity, force or impulse, you choose. Moves in direction they are facing, use angular velocity to rotate. 
++We will have a class on angular velocity and torque in the first week back, in the mean time feel free to search it or email me questions regarding it. 
 There should be a regular speed and sprint speed. There also should be a jump that is good enough to clear a 2m obstacle and make it under a 6m ceiling. In both sprint and regular speed. 
 Use arrow keys or wasd for movement and space to jump. A/d can be used for rotation or strafing, in that case find two other buttons or use mouse to control player rotation.
 Falling platforms/tiles (10%)

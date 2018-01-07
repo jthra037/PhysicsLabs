@@ -13,6 +13,8 @@ public class PlayerController : MonoBehaviour {
     [SerializeField]
     private float moveSpeed = 10;
     [SerializeField]
+    private float maxSpeed = 5;
+    [SerializeField]
     private float rotSpeed = 10;
     [SerializeField]
     private float airbourneModifier = 0.2f;
@@ -26,6 +28,7 @@ public class PlayerController : MonoBehaviour {
     private bool grounded = true;
     private bool jumping = false;
     private bool falling = false;
+    private bool isSprinting = false;
 
     private float jumpSpeed;
     private Coroutine hintRoutine;
@@ -85,13 +88,21 @@ public class PlayerController : MonoBehaviour {
     {
         // figure out if we should be hampering the players controls because they are in the air
         float airDamp = grounded ? 1 : airbourneModifier;
+        float sprintMod = Input.GetKey(KeyCode.LeftShift) ? 2 : 1;
 
         if (!(isInCannon || isShotFromCannon))
         { 
             // apply the forces by multiplying relevant modifier and input axis
-            rb.AddForce(transform.forward * moveSpeed * airDamp * Input.GetAxisRaw("Vertical"));
-            rb.AddForce(transform.right * moveSpeed * airDamp * Input.GetAxisRaw("Strafe"));
+            rb.AddForce(transform.forward * moveSpeed * airDamp * Input.GetAxisRaw("Vertical") * sprintMod);
+            rb.AddForce(transform.right * moveSpeed * airDamp * Input.GetAxisRaw("Strafe") * sprintMod);
             rb.AddTorque(transform.up * rotSpeed * airDamp * Input.GetAxis("Horizontal"));
+        }
+
+        Vector2 controllableMovement = new Vector2(rb.velocity.x, rb.velocity.z);
+        if (controllableMovement.sqrMagnitude > (maxSpeed * maxSpeed * sprintMod) && !isShotFromCannon)
+        {
+            controllableMovement = controllableMovement.normalized * maxSpeed * sprintMod;
+            rb.velocity = new Vector3(controllableMovement.x, rb.velocity.y, controllableMovement.y);
         }
 
         // only allow player to jump if they are 
