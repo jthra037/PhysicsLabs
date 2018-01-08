@@ -450,9 +450,9 @@ MonoBehaviour:
     m_HorizontalOverflow: 1
     m_VerticalOverflow: 1
     m_LineSpacing: 1
-  m_Text: 'Press any key to play again,
+  m_Text: 'Press R to quickly replay,
 
-    except Escape which will return you to the menu.'
+    presst Escape to quit.'
 --- !u!222 &967369592
 CanvasRenderer:
   m_ObjectHideFlags: 0

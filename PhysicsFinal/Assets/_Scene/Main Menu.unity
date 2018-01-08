@@ -278,6 +278,8 @@ MonoBehaviour:
 
     A-D: Player Rotation
 
+    Left Shift: Sprint
+
     Space: Jump
 
     R (from anywhere) : Reload main game
